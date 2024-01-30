@@ -34,6 +34,10 @@ private:
     
     ofxNDIreceiver ndiReceiver; // NDI receiver
     
+    int numSenders;
+    vector<string> videoDevices;
+    string currentName;
+    
     ofEventListeners listeners;
 };
 
