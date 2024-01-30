@@ -17,6 +17,8 @@ NDICamera::~NDICamera(){
 
 void NDICamera::setup(){
     vector<string> videoDevices = {"None", "test"};
+    ndiReceiver.ReceiveImage(ndiTex1);
+    ndiReceiver.ReceiveImage(ndiTex1);
     
     addParameterDropdown(deviceID, "Device", 0, videoDevices);
     addParameter(output.set("Output", nullptr));
