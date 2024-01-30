@@ -23,6 +23,10 @@ public:
     
     void selectedDevice(int &identifier);
     
+    void presetSave(ofJson &json);
+        
+    void presetRecallAfterSettingParameters(ofJson &json);
+    
 private:
     ofParameter<int> deviceID;
     ofParameter<ofTexture*> output;

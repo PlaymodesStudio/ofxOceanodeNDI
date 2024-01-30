@@ -86,3 +86,21 @@ void NDICamera::selectedDevice(int &identifier){
         currentName = "None";
     }
 }
+
+void NDICamera::presetSave(ofJson &json){
+    json["ServerName"] = currentName;
+}
+    
+void NDICamera::presetRecallAfterSettingParameters(ofJson &json){
+    string name = "None";
+    if(json.count("ServerName") == 1){
+        name = json["ServerName"];
+    }
+    auto it = std::find(videoDevices.begin(), videoDevices.end(), name);
+    
+    if(it != videoDevices.end()){
+        deviceID = it - videoDevices.begin();
+    }else{
+        deviceID = 0;
+    }
+}
