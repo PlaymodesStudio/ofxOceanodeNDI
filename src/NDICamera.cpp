@@ -17,6 +17,9 @@ NDICamera::~NDICamera(){
 
 void NDICamera::setup(){
     vector<string> videoDevices = {"None", "test"};
+    ndiTex1.allocate(1920, 1080, GL_RGBA);
+    ndiTex2.allocate(1920, 1080, GL_RGBA);
+    ndiTex2.allocate(1920, 1080, GL_RGBA);
     ndiReceiver.ReceiveImage(ndiTex1);
     ndiReceiver.ReceiveImage(ndiTex1);
     
