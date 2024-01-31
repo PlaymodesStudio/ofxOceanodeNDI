@@ -40,6 +40,7 @@ void NDICamera::setup(){
 }
 
 void NDICamera::update(ofEventArgs &a){
+    ndiReceiver.FindSenders();
     if(ndiReceiver.GetSenderCount() != numSenders){
         numSenders = ndiReceiver.GetSenderCount();
         videoDevices = {"None"};
@@ -47,9 +48,13 @@ void NDICamera::update(ofEventArgs &a){
             videoDevices.push_back(ndiReceiver.GetSenderName(i));
         }
         
-        if(deviceID >= videoDevices.size() || currentName != videoDevices[deviceID]){
+        auto it = std::find(videoDevices.begin(), videoDevices.end(), currentName);
+        if(it != videoDevices.end()){
+            deviceID = it - videoDevices.begin();
+        }else{
             deviceID = 0;
         }
+        
         getOceanodeParameter<int>(deviceID).setDropdownOptions(videoDevices);
         deviceID.setMax(videoDevices.size()-1);
     }
