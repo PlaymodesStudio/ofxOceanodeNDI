@@ -41,6 +41,7 @@ private:
     int numSenders;
     vector<string> videoDevices;
     string currentName;
+    string savedOnPresetName;
     
     ofEventListeners listeners;
 };

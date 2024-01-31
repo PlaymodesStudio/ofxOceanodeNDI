@@ -48,7 +48,9 @@ void NDICamera::update(ofEventArgs &a){
             videoDevices.push_back(ndiReceiver.GetSenderName(i));
         }
         
-        auto it = std::find(videoDevices.begin(), videoDevices.end(), currentName);
+        string name = currentName;
+        if(savedOnPresetName != "") name = savedOnPresetName;
+        auto it = std::find(videoDevices.begin(), videoDevices.end(), name);
         if(it != videoDevices.end()){
             deviceID = it - videoDevices.begin();
         }else{
@@ -87,6 +89,7 @@ void NDICamera::selectedDevice(int &identifier){
     if(identifier > 0){
         ndiReceiver.SetSenderIndex(identifier-1);
         currentName = ndiReceiver.GetSenderName(identifier-1);
+        savedOnPresetName = "";
     }else{
         currentName = "None";
     }
@@ -106,6 +109,7 @@ void NDICamera::presetRecallAfterSettingParameters(ofJson &json){
     if(it != videoDevices.end()){
         deviceID = it - videoDevices.begin();
     }else{
+        savedOnPresetName = name;
         deviceID = 0;
     }
 }
