@@ -54,6 +54,7 @@ void NDICamera::update(ofEventArgs &a){
         if(it != videoDevices.end()){
             deviceID = it - videoDevices.begin();
         }else{
+            savedOnPresetName = currentName;
             deviceID = 0;
         }
         
