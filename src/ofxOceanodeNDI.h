@@ -10,10 +10,12 @@
 
 #include "ofxOceanode.h"
 #include "NDICamera.h"
+#include "NDISender.h"
 
 namespace ofxOceanodeNDI{
 static void registerModels(ofxOceanode &o){
     o.registerModel<NDICamera>("NDI");
+    o.registerModel<NDISender>("NDI");
 }
 
 static void registerType(ofxOceanode &o){
