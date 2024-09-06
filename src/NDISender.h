@@ -23,14 +23,34 @@ public:
         
         listeners.push(senderName.newListener([this](string &s){
             ndiSender.ReleaseSender();
-            ndiSender.CreateSender(senderName->c_str(), 100, 100);
+            createNDISender();
         }));
         
         addParameter(input.set("Input", nullptr));
+        createNDISender();
+    }
+    void createNDISender()
+    {
+        // Option : set readback
+        // Pixel data extraction from fbo or texture
+        // is optimised using two OpenGL pixel buffers (pbo's)
+        // Note that the speed can vary with different CPUs
+        //ndiSender.SetReadback();
         
-        ndiSender.SetReadback();
-        ndiSender.SetAsync();
-        ndiSender.CreateSender(senderName->c_str(), 100, 100);
+        // Option : set NDI asynchronous sending
+        // If disabled, the render rate is clocked to the sending framerate.
+        //ndiSender.SetAsync();
+        
+        ndiSender.SetFrameRate(60);
+        
+        int w,h = 100;
+        if(input.get()!=NULL)
+        {
+            w = input.get()->getWidth();
+            h = input.get()->getHeight();
+        }
+        
+        ndiSender.CreateSender(senderName->c_str(), w, h);
     }
     
     void update(ofEventArgs &a) override{
